@@ -1,0 +1,27 @@
+.white-box .counter-box {
+    margin: 0px; !important;
+}
+
+.counter {
+    float: right;
+    font-size: 40px;
+}
+
+.dashboard-time{
+    float: right;
+    font-size: 40px;
+}
+
+#working-hours_wrapper{
+    padding: 0px;
+}
+
+.working-hour-tr{
+    font-size: 15px;
+    margin-top: 10px;
+    line-height: 32px;
+}
+
+.table-header{
+    margin: 0px 0px 0px 0px;
+}
