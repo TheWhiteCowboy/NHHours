@@ -1,26 +1,10 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 \Illuminate\Support\Facades\Auth::routes();
 
 Route::get('/debug', function () {
-
-    $users = \NHHours\Models\WorkingHour::select([
-        'name',
-        'email',
-        'created_at',
-        'updated_at'
-    ]);
-    dd($users);
+//    dd(Carbon::create( , $month, 0, 0, 0, 0));
+    dd(\Carbon\Carbon::now()->year(2018)->lastOfyear()->toDateString());
 });
 
 Route::get('/logout', function () {
@@ -29,10 +13,12 @@ Route::get('/logout', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', 'DashboardController@index')->name('index');
+    Route::get('/', 'DashboardController@index')->name('dashboard.index');
+    Route::post('/', 'DashboardController@index');
 
-    Route::post('/load_working_hours', 'DashboardController@loadWorkingHours')->name('loadWorkingHours');
+    Route::get('/profile', 'UsersController@index')->name('user.index');
+    Route::post('/profile/{id}', 'UsersController@update')->name('user.update');
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/departments', 'DepartmentsController@index')->name('department.index');
+    Route::post('/departments/save/{id}', 'DepartmentsController@save')->name('department.save');
 });
-//Route::get('/home', 'longController@index')->name('login');

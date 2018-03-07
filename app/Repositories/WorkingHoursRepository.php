@@ -1,6 +1,5 @@
 <?php namespace NHHours\Repositories;
 
-use Carbon\Carbon;
 use NHHours\Models\Scopes\WorkingHoursScope;
 
 class WorkingHoursRepository
@@ -9,7 +8,7 @@ class WorkingHoursRepository
     {
         $workingHours = (new WorkingHoursScope())->init()
             ->forUser($user_id)
-            ->forMonth($month)
+            ->forDate(null, $month)
             ->query()
             ->get();
 

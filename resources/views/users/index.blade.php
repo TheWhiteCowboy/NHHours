@@ -1,45 +1,61 @@
 @extends('layouts.base')
 @section('content')
-<div class="row">
-    <div class="col-md-8 col-xs-12">
-        <div class="white-box">
-            <form class="form-horizontal form-material">
-                <div class="form-group">
-                    <label class="col-md-12">Full Name</label>
-                    <div class="col-md-12">
-                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Profiel</h4>
+        </div>
+    </div>
+    <div class="row">
+        {!! Form::open(['url' => '', 'class' => 'form-horizontal form-material','id' => 'user-profile', 'data-identity' => $user->id]) !!}
+        <div class="col-md-4 col-xs-12">
+            <div class="white-box">
+                <div class="user-bg"><img width="100%" alt="user" src="/images/natural-high.jpg">
+                    <div class="overlay-box">
+                        <div class="user-content">
+                            <a href="javascript:void(0)"><img src="../plugins/images/users/genu.jpg"
+                                                              class="thumb-lg img-circle" alt="img"></a>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="white-box">
+                <h3>Afdelingen</h3>
+                @foreach($departments as $department)
+                    {{ Form::checkbox('departments[]', $department->id, null, ['class' => 'department-checkbox']) }} {{$department->name}}
+                    <br/>
+                @endforeach
+            </div>
+        </div>
+        <div class="col-md-8 col-xs-12">
+            <div class="white-box">
                 <div class="form-group">
-                    <label for="example-email" class="col-md-12">Email</label>
+                    <label class="col-md-12">Naam<span class="text-danger" id="full_name-error"></span></label>
                     <div class="col-md-12">
-                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12">Password</label>
-                    <div class="col-md-12">
-                        <input type="password" value="password" class="form-control form-control-line"> </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12">Phone No</label>
-                    <div class="col-md-12">
-                        <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12">Message</label>
-                    <div class="col-md-12">
-                        <textarea rows="5" class="form-control form-control-line"></textarea>
+                        {{ Form::text('full_name', $user->full_name, ['class' => 'form-control form-control-line', 'placeholder' => 'Naam']) }}
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-12">Select Country</label>
-                    <div class="col-sm-12">
-                        <select class="form-control form-control-line">
-                            <option>London</option>
-                            <option>India</option>
-                            <option>Usa</option>
-                            <option>Canada</option>
-                            <option>Thailand</option>
-                        </select>
+                    <label class="col-md-12">E-mail<span class="text-danger" id="email-error"></span></label>
+                    <div class="col-md-12">
+                        {{ Form::text('email', $user->email, ['class' => 'form-control form-control-line', 'placeholder' => 'E-mail']) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12">Tefeloonnummer<span class="text-danger" id="phone-error"></span></label>
+                    <div class="col-md-12">
+                        {{ Form::text('phone', $user->phone, ['class' => 'form-control form-control-line', 'placeholder' => 'Telefoonnummer']) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12">Geboortedatum<span class="text-danger" id="birth-error"></span></label>
+                    <div class="col-md-12">
+                        {{ Form::date('birth_date', $user->birth_date, ['class' => 'form-control form-control-line', 'placeholder' => 'Geboortedatum']) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12">Uren contract (leeg laten indien 0 uren)</label>
+                    <div class="col-md-12">
+                        {{ Form::number('contract_hours', $user->contract_hours, ['class' => 'form-control form-control-line', 'placeholder' => 'Contract uren']) }}
                     </div>
                 </div>
                 <div class="form-group">
@@ -47,8 +63,8 @@
                         <button class="btn btn-success">Update Profile</button>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
+        {!! Form::close() !!}
     </div>
-</div>
 @endsection

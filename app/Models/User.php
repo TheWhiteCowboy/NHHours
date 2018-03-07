@@ -2,6 +2,7 @@
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Validator;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
@@ -19,8 +20,28 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function fullName()
+    public $dates = ['birth_date'];
+
+    public static function validateUpdate($data)
     {
-        return $this->first_name . ' ' . $this->prefix . ' ' . $this->surname;
+        return Validator::make($data,
+            [
+                'full_name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required',
+                'birth_date' => 'required|date',
+            ],
+            static::getValidationMessages()
+        );
+    }
+
+    public static function getValidationMessages()
+    {
+        return [
+            'required' => 'Verplicht',
+            'email.email' => 'Voer een geldig e-mail adres in',
+            'email.unique' => 'E-mail adres al in gebruik',
+            'birth_date.date' => 'Vul een geldige datum in',
+        ];
     }
 }

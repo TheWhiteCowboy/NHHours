@@ -18,12 +18,24 @@ class WorkingHoursScope extends BaseScope
         return $this;
     }
 
-    public function forMonth($month)
+    public function forDate($year = null, $month = null)
     {
-        $from = Carbon::now()->month($month)->firstOfMonth();
-        $to = Carbon::now()->month($month)->lastOfMonth();
+        $from = Carbon::now();
+        $to = Carbon::now();
 
-        $this->currentQuery()->whereBetween('date', [$from, $to]);
+        if ($month != null && $year != null){
+            $from = $from->year($year)->month($month)->firstOfMonth();
+            $to = $to->year($year)->month($month)->lastOfMonth();
+        }
+        elseif ($year != null) {
+            $from = $from->year($year)->firstOfYear();
+            $to = $to->year($year)->lastOfYear();
+        } elseif ($month != null) {
+            $from = $from->year(Carbon::now()->year)->month($month)->firstOfMonth();
+            $to = $to->year(Carbon::now()->year)->month($month)->lastOfMonth();
+        }
+
+        $this->currentQuery()->whereBetween('date', [$from->toDateString(), $to->toDateString()]);
 
         return $this;
     }

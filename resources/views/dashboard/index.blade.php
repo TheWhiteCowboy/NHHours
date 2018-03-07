@@ -38,17 +38,16 @@
             <form id="working-hours-filters">
                 <div class="table-header">
                     {!! Form::open(['url' => '', 'id' => 'working-hours-filters']) !!}
+                    @if(Entrust::hasRole('admin'))
                     <div class="col-md-3">
-                        {{ Form::select('size', ['L' => 'januari', 'S' => 'februari'], null, ['class' => 'form-control select-user']) }}
+                        {{ Form::select('user', $userOptions, null, ['class' => 'form-control', 'id' => 'select-user']) }}
                     </div>
+                    @endif
                     <div class="col-md-3">
-                        {{ Form::select('size', ['L' => 'Large', 'S' => 'Small'], null, ['class' => 'form-control']) }}
+                        {{ Form::select('month', ['' => 'Geen maand', '1' => 'januari', '2' => 'februari', '3' => 'maart', '4' => 'april', '5' => 'mei', '6' => 'juni', '7' => 'juli', '8' => 'augustus', '9' => 'september', '10' => 'oktober', '11' => 'november', '12' => 'december'], null, ['class' => 'form-control', 'id' => 'select-month']) }}
                     </div>
-                    <div class="col-md-3">
-                        {{ Form::text('username', '', ['class' => 'form-control', 'placeholder' => 'Zoeken..']) }}
-                    </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-success btn-block pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Filteren</button>
+                    <div class="col-md-2">
+                        {{ Form::select('year', ['' => 'Geen jaar', '2018' => '2018', '2019' => '2019'], null, ['class' => 'form-control', 'id' => 'select-year']) }}
                     </div>
                     {!! Form::close() !!}
                 </div>

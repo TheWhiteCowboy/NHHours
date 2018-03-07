@@ -17,9 +17,7 @@ class Init extends Migration
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('first_name');
-            $table->string('prefix')->nullable();
-            $table->string('surname');
+            $table->string('full_name');
             $table->date('birth_date');
             $table->string('phone');
             $table->integer('contract_hours');
