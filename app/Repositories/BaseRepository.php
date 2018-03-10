@@ -2,12 +2,12 @@
 
 use NHHours\Models\User;
 
-class BaseRepository
+abstract class BaseRepository
 {
+    abstract public function buildQuery();
+
     public function read($id)
     {
         return $this->buildQuery()->find($id);
     }
-
-
 }

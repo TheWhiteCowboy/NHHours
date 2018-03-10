@@ -27,6 +27,23 @@
     margin: 0px 0px 0px 0px;
 }
 
-.department-checkbox{
-    margin-right: 5px!important;
+.department-checkbox {
+    margin-right: 5px !important;
+}
+
+#working-hours {
+    margin-top: 10px;
+}
+
+input[type=time]::-webkit-inner-spin-button,
+input[type=time]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-inner-spin-button{
+    display: none;
 }

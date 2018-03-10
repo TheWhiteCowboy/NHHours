@@ -46,7 +46,7 @@
                                 aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="exampleModalLabel">Afdeling toevoegen</h4>
                 </div>
-                {!! Form::open(['url' => '', 'class' => 'form-horizontal form-material', 'id' => 'add-department', 'data-identity' => 3]) !!}
+                {!! Form::open(['url' => '', 'class' => 'form-horizontal form-material', 'id' => 'add-department', 'data-identity' => \Illuminate\Support\Facades\Auth::user()->company_id]) !!}
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-md-12">Naam van de afdeling<span class="text-danger"

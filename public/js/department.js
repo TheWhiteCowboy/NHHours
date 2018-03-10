@@ -5,7 +5,7 @@ $(document).ready(function () {
 
         $.ajax(
             {
-                url: '/department/save/' + id,
+                url: '/departments/save/' + id,
                 type: "post",
                 datatype: "html",
                 data: $("#add-department form").serialize()
@@ -20,13 +20,14 @@ $(document).ready(function () {
                     hideAfter: 3500,
                     stack: 6
                 });
+                $("#add-department").modal('hide');
+
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
-                console.log(jqXHR);
-                // $.each(jqXHR.responseJSON, function (index, value) {
-                //     $('input[name=' + index + ']').closest(".form-group").addClass('has-error');
-                //     $('#' + index + '-error').html(' - ' + value);
-                // });
+                $.each(jqXHR.responseJSON, function (index, value) {
+                    $('input[name=' + index + ']').closest(".form-group").addClass('has-error');
+                    $('#' + index + '-error').html(' - ' + value);
+                });
             });
     });
 });

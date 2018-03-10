@@ -1,12 +1,11 @@
 <?php namespace NHHours\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
-
 use NHHours\Models\Department;
 use NHHours\Models\Scopes\DepartmentScope;
-use NHHours\Repositories\UserRepository;
+use NHHours\Repositories\DepartmentFactory;
 
 class DepartmentsController extends Controller
 {
@@ -19,13 +18,13 @@ class DepartmentsController extends Controller
 
     public function save(Request $request, $company_id)
     {
-        dd('tset');
-//        $user = (new UserRepository())->read($id);
         $validator = Department::validate($request->all());
 
         if ($validator->fails()) {
             return Response::json($validator->errors(), 400);
         }
+
+        (new DepartmentFactory())->create($company_id, $request->all());
 
         return Response::json([], 200);
     }

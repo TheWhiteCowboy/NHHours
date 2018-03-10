@@ -1,9 +1,17 @@
 <?php namespace NHHours\Repositories;
 
 use NHHours\Models\Scopes\WorkingHoursScope;
+use NHHours\Models\WorkingHour;
 
-class WorkingHoursRepository
+class WorkingHoursRepository extends BaseRepository
 {
+    public $query;
+
+    public function buildQuery()
+    {
+        return $this->query = WorkingHour::query();
+    }
+
     public function getWorkingHoursPerMonth($user_id, $month)
     {
         $workingHours = (new WorkingHoursScope())->init()
